@@ -6,8 +6,9 @@ import android.provider.MediaStore
 import android.util.Log
 import com.example.myimagegallery.data.model.Image
 import com.example.myimagegallery.data.repository.ImageRepository
+import javax.inject.Inject
 
-class ImageRepositoryImpl(val context: Context) : ImageRepository {
+class ImageRepositoryImpl @Inject constructor(val context: Context) : ImageRepository {
 
     override suspend fun getImages(): MutableList<Image> {
         val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -32,11 +33,14 @@ class ImageRepositoryImpl(val context: Context) : ImageRepository {
                 val bucketName = cursor.getString(bucketNameColumnIndex)
                 val bucketId = cursor.getString(bucketIdColumnIndex)
                 val imageUri = ContentUris.withAppendedId(uri, id)
-                images.add(Image(id, bucketName, bucketId, imageUri))
+                images.add(Image(id, bucketName, bucketId, imageUri.toString()))
                 Log.d("ImageLog", "getImages: $imageUri")
             }
         }
 
         return images
     }
+
+    override fun getAlbums(images: List<Image>): Map<String, List<Image>> =
+        images.groupBy { it.bucketName }
 }

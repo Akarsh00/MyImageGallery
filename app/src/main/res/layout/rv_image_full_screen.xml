@@ -5,24 +5,22 @@
 
     <data>
 
+        <variable
+            name="image"
+            type="com.example.myimagegallery.data.model.Image" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvImage"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:imageURL="@{image.imageUri}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:spanCount="3"
-            tools:itemCount="16"
-            tools:listitem="@layout/rv_image_single_item" />
+            tools:src="@tools:sample/avatars" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
