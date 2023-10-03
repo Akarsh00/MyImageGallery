@@ -1,12 +1,9 @@
 package com.example.myimagegallery.presentation
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.myimagegallery.data.imageaccess.ImageRepositoryImpl
 import com.example.myimagegallery.data.model.Image
 import com.example.myimagegallery.data.repository.ImageRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +20,7 @@ class MainViewModel @Inject constructor(val imageRepository: ImageRepository) : 
     private val _album = MutableLiveData<Map<String, List<Image>>>()
 
     val album: LiveData<Map<String, List<Image>>>
-        get() = album
+        get() = _album
 
     val fullScreenImage = MutableLiveData<Map<Long, List<Image>>>(null)
 
@@ -35,15 +32,15 @@ class MainViewModel @Inject constructor(val imageRepository: ImageRepository) : 
 
 
     init {
-        getImageData()
-        getAlbumData()
+        getImageDataSource()
     }
 
-    fun getImageData() {
+    fun getImageDataSource() {
         viewModelScope.launch {
             try {
                 val allImages = async { imageRepository.getImages() }
-                _images.postValue(allImages.await())
+                _images.value = allImages.await()
+                getAlbumData()
 
             } catch (ex: Exception) {
                 _error.postValue("Something went wrong $error")

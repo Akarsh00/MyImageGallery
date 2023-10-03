@@ -10,6 +10,7 @@ data class Image(
     val imageUri: String,
     val isSelected: Boolean = false
 )
+
 val IMAGE_DIFF_UTIL = object : DiffUtil.ItemCallback<Image>() {
     override fun areItemsTheSame(oldItem: Image, newItem: Image): Boolean = oldItem == newItem
 
