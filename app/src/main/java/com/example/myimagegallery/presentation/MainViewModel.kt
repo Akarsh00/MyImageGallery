@@ -19,13 +19,12 @@ class MainViewModel @Inject constructor(val imageRepository: ImageRepository) : 
         get() = _images
     private val _album = MutableLiveData<Map<String, List<Image>>>()
 
+
     val album: LiveData<Map<String, List<Image>>>
         get() = _album
 
     val fullScreenImage = MutableLiveData<Map<Long, List<Image>>>(null)
 
-
-    val navigateToFullScreenImage = MutableLiveData(false)
     private val _error = MutableLiveData<String>()
     val error: LiveData<String>
         get() = _error
@@ -35,7 +34,7 @@ class MainViewModel @Inject constructor(val imageRepository: ImageRepository) : 
         getImageDataSource()
     }
 
-    fun getImageDataSource() {
+    private fun getImageDataSource() {
         viewModelScope.launch {
             try {
                 val allImages = async { imageRepository.getImages() }
@@ -48,7 +47,7 @@ class MainViewModel @Inject constructor(val imageRepository: ImageRepository) : 
         }
     }
 
-    fun getAlbumData() {
+    private fun getAlbumData() {
         _images.value?.let { images ->
             if (images.isEmpty()) {
                 viewModelScope.launch {
@@ -67,9 +66,5 @@ class MainViewModel @Inject constructor(val imageRepository: ImageRepository) : 
 
     }
 
-    fun imageListItemClick(imageList: List<Image>, imageId: Long) {
-        fullScreenImage.value = mapOf(imageId to imageList)
-        navigateToFullScreenImage.value = true
-    }
 }
 

@@ -3,19 +3,25 @@ package com.example.myimagegallery.presentation.fragment.album
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myimagegallery.R
 import com.example.myimagegallery.data.model.Image
 import com.example.myimagegallery.databinding.AlbumItemBinding
 import javax.inject.Inject
 
-class AlbumRecyclerViewAdapter @Inject constructor() : RecyclerView.Adapter<AlbumRecyclerViewAdapter.AlbumViewHolder>() {
+class AlbumRecyclerViewAdapter @Inject constructor() :
+    RecyclerView.Adapter<AlbumRecyclerViewAdapter.AlbumViewHolder>() {
 
-    var itemsAlbum: List<Image> = mutableListOf()
+    var albumViewModel: AlbumViewModel? = null
+    var itemsAlbum: List<Image?> = mutableListOf()
+
+    fun initAlbumViewMode(viewModel: AlbumViewModel) {
+        albumViewModel = viewModel
+    }
 
     inner class AlbumViewHolder(val binding: AlbumItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(itemsAlbum: Image) {
 
+            binding.viewModel = albumViewModel
             binding.image = itemsAlbum
         }
     }
@@ -29,7 +35,7 @@ class AlbumRecyclerViewAdapter @Inject constructor() : RecyclerView.Adapter<Albu
     override fun getItemCount(): Int = itemsAlbum.size
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        holder.bind(itemsAlbum[position])
+        itemsAlbum[position]?.let { holder.bind(it) }
 
     }
 }

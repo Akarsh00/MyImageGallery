@@ -5,7 +5,7 @@
     app:startDestination="@id/imageFragment">
     <fragment
         android:id="@+id/imageFragment"
-        android:name="com.example.myimagegallery.presentation.fragment.image.ImagesFragment"
+        android:name="com.example.myimagegallery.presentation.fragment.homeimage.ImagesFragment"
         android:label="ImageFragment">
         <action
             android:id="@+id/action_imageFragment_to_fullScreenImageFragment"
@@ -14,9 +14,20 @@
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.myimagegallery.presentation.fragment.album.AlbumFragment"
-        android:label="AlbumFragment" />
+        android:label="AlbumFragment">
+        <argument
+            android:name="bucketName"
+            android:defaultValue="" />
+        <action
+            android:id="@+id/action_albumFragment_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fullScreenImageFragment"
         android:name="com.example.myimagegallery.presentation.fragment.fullscreenimage.FullScreenImageFragment"
         android:label="FullScreenImageFragment" />
+    <fragment
+        android:id="@+id/albumDetailFragment"
+        android:name="com.example.myimagegallery.presentation.fragment.albumdetail.AlbumDetailFragment"
+        android:label="AlbumDetailFragment" />
 </navigation>

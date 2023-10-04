@@ -8,8 +8,8 @@
         <import type="java.util.List" />
 
         <variable
-            name="mainViewModel"
-            type="com.example.myimagegallery.presentation.MainViewModel" />
+            name="viewModel"
+            type="com.example.myimagegallery.presentation.fragment.album.AlbumViewModel" />
 
 
         <variable
@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="@color/cardview_light_background"
-                android:onClick="@{()->mainViewModel.imageListItemClick(currentList,image.id)}"
+                android:onClick="@{()->viewModel.onAlbumItemClick(image.bucketName)}"
                 android:scaleType="centerCrop"
                 app:imageURL="@{image.imageUri}"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -8,8 +8,8 @@
         <import type="java.util.List" />
 
         <variable
-            name="mainViewModel"
-            type="com.example.myimagegallery.presentation.MainViewModel" />
+            name="viewModel"
+            type="com.example.myimagegallery.presentation.fragment.homeimage.ImageFragmentViewModel" />
 
 
         <variable
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@color/cardview_light_background"
-            android:onClick="@{()->mainViewModel.imageListItemClick(currentList,image.id)}"
+            android:onClick="@{()->viewModel.homeImageListItemClick(currentList,image.id)}"
             android:scaleType="centerCrop"
             app:imageURL="@{image.imageUri}"
             app:layout_constraintBottom_toBottomOf="parent"

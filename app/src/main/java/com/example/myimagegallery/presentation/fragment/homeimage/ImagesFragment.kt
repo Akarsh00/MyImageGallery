@@ -1,4 +1,4 @@
-package com.example.myimagegallery.presentation.fragment.image
+package com.example.myimagegallery.presentation.fragment.homeimage
 
 import android.os.Bundle
 import android.view.View
@@ -15,7 +15,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ImagesFragment : Fragment(R.layout.fragment_image) {
     lateinit var binding: FragmentImageBinding
-    val viewModel: MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val imageViewModel: ImageFragmentViewModel by viewModels()
 
     @Inject
     lateinit var adapter: ImageRecyclerViewAdapter
@@ -24,17 +25,23 @@ class ImagesFragment : Fragment(R.layout.fragment_image) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentImageBinding.bind(view)
         binding.rvImage.adapter = adapter
-        adapter.initViewModel(viewModel)
-        viewModel.images.observe(viewLifecycleOwner) {
+        adapter.initViewModel(imageViewModel)
+        mainViewModel.images.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                imageViewModel.images.value = it
+            }
+        }
+        imageViewModel.images.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 adapter.submitList(it)
             }
         }
 
-        viewModel.navigateToFullScreenImage.observe(viewLifecycleOwner) {
+        imageViewModel.navigateToFullScreenImage.observe(viewLifecycleOwner) {
             if (it) {
+                mainViewModel.fullScreenImage.value = imageViewModel.fullScreenImage
                 findNavController().navigate(R.id.action_imageFragment_to_fullScreenImageFragment)
-                viewModel.navigateToFullScreenImage.value = false
+                imageViewModel.navigateToFullScreenImage.value = false
             }
         }
     }
