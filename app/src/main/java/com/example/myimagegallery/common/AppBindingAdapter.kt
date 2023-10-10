@@ -6,5 +6,5 @@ import coil.load
 
 @BindingAdapter("imageURL")
 fun image(imageView: ImageView, uri: String) {
-    imageView.load(uri)
+    imageView.load(uri )
 }
