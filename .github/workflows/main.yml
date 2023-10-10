@@ -30,19 +30,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+lint-check:
+  stage: lint-check
+  before_script:
+    - chmod +x ./gradlew
+    - export GRADLE_USER_HOME=$PWD/.gradle
+  script:
+    - ./gradlew ktlintCheck
 
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Install ktlint
-        run: |
-          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.42.1/ktlint
-          chmod +x ktlint
-          sudo mv ktlint /usr/local/bin/
-
-      - name: Run ktlint
-        run: ktlint --reporter=plain --color always --absolute-path "**/*.kt" || exit 0
 
