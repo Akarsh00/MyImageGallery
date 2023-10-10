@@ -25,17 +25,17 @@ on:
 #          echo other action to build!
 #          echo test and deploy your project.
 jobs:
-  ktlint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-lint-check:
-  stage: lint-check
-  before_script:
-    - chmod +x ./gradlew
-    - export GRADLE_USER_HOME=$PWD/.gradle
-  script:
-    - ./gradlew ktlintCheck
+  #  ktlint:
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - name: Checkout code
+  #        uses: actions/checkout@v2
+  lint-check:
+    stage: lint-check
+    before_script:
+      - chmod +x ./gradlew
+      - export GRADLE_USER_HOME=$PWD/.gradle
+    script:
+      - ./gradlew ktlintCheck
 
 
