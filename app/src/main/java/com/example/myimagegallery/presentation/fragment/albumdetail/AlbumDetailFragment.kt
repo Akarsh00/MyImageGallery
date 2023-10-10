@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.myimagegallery.R
 import com.example.myimagegallery.databinding.AlbumDetailFragmentBinding
 import com.example.myimagegallery.presentation.MainViewModel
@@ -23,8 +24,16 @@ class AlbumDetailFragment : Fragment(R.layout.album_detail_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = AlbumDetailFragmentBinding.bind(view)
+        albumDetailRecyclerViewAdapter.initViewModel(albumDetailViewModel)
         arguments?.let {
             albumDetailViewModel.albumName.value = it.getString("bucketName", "")
+        }
+        albumDetailViewModel.navigateToFullScreenImage.observe(viewLifecycleOwner) {
+            if (it) {
+                mainViewModel.fullScreenImage.value = albumDetailViewModel.fullScreenImage
+                findNavController().navigate(R.id.fullScreenImageFragment)
+                albumDetailViewModel.navigateToFullScreenImage.value = false
+            }
         }
         mainViewModel.album.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {

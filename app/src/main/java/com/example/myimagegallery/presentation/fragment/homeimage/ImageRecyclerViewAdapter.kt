@@ -27,16 +27,13 @@ class ImageRecyclerViewAdapter @Inject constructor() :
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = RvImageSingleItemBinding.inflate(inflater, parent, false)
         return ItemViewHolder(binding)
     }
 
-
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(image = getItem(position))
     }
 }
-

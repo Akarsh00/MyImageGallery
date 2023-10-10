@@ -11,17 +11,32 @@ on:
   workflow_dispatch:
 
 # Where it will run
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Run a one-line Script
+#      run: echo Hello, World!
+#
+#    - name: Run a multi-line script
+#      run:
+#          echo other action to build!
+#          echo test and deploy your project.
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Run a one-line Script
-      run: echo Hello, World!
+      - uses: actions/checkout@v2
 
-    - name: Run a multi-line script
-      run: 
-          echo other action to build!
-          echo test and deploy your project.
-      
+      - name: Run ktlint
+        run: ./gradlew ktlintCheck
+
+      - name: Upload Test
+        run: actions/upload-artifact@v2
+        with:
+          name: index.html
+          path: app/build/reports/lint-results-debug.html
+

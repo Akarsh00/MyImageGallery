@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.example.myimagegallery.R
@@ -49,6 +50,11 @@ class FullScreenImageFragment : Fragment(R.layout.fragment_full_screen) {
                 fullScreenImageAdapter.imageList = it
             }
         }
+    }
+
+    override fun onDestroyView() {
+        viewModel.fullScreenImage.value = mutableMapOf()
+        super.onDestroyView()
     }
 
 }
