@@ -1,0 +1,27 @@
+name: Release App
+
+# When it will be triggered
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+# Where it will run
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run a one-line Script
+      run: echo Hello, World!
+
+    - name: Run a multi-line script
+      run: 
+          echo other action to build!
+          echo test and deploy your project.
+      
