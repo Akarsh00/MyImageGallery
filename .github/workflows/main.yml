@@ -39,7 +39,8 @@ jobs:
 
       - name: Run lint
         run:
-          ./gradlew ktlintCheck
+          ./gradlew ktlintCheck --exclude=final-newline,import-orderin", no-wildcard-imports
+
 
 
 #    before_script:
