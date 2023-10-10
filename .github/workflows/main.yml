@@ -24,6 +24,11 @@ on:
 #      run:
 #          echo other action to build!
 #          echo test and deploy your project.
+disabled_rules:
+  - final-newline
+  - import-order
+  - no-wildcard-imports
+
 jobs:
   ktlint:
     runs-on: ubuntu-latest
@@ -38,9 +43,7 @@ jobs:
           java-version: '17'
 
       - name: Run lint
-        run: |
-            ./gradlew ktlintCheck --ktlint.exclude=final-newline,import-order,no-wildcard-imports
-
+        run: ./gradlew ktlintCheck
 
 
 
