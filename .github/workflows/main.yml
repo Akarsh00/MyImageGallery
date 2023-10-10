@@ -38,8 +38,9 @@ jobs:
           java-version: '17'
 
       - name: Run lint
-        run:
-          ./gradlew ktlintCheck --exclude=final-newline,import-orderin, no-wildcard-imports
+        run: |
+            ./gradlew ktlintCheck -- -Dktlint.exclude=final-newline,import-order,no-wildcard-imports
+
 
 
 
