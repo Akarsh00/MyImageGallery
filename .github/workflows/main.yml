@@ -31,11 +31,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Run lint
+        uses: actions/checkout@v2
+        run:
+          ./gradlew ktlintCheck
+
+
 #    before_script:
 #      - chmod +x ./gradlew
 #      - export GRADLE_USER_HOME=$PWD/.gradle
-    run:
-      - ./gradlew ktlintCheck
 
 
 
