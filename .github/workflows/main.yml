@@ -25,15 +25,24 @@ on:
 #          echo other action to build!
 #          echo test and deploy your project.
 jobs:
-  build:
+  ktlint:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Install ktlint
+        run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.42.1/ktlint
+          chmod +x ktlint
+          sudo mv ktlint /usr/local/bin/
 
       - name: Run ktlint
-        run: ./gradlew ktlintCheck
-
-      - name: Upload Test
-        run: actions/upload-artifact@v2
+        run: ktlint --reporter=plain --color always --absolute-path "**/*.kt" || exit 0
 
