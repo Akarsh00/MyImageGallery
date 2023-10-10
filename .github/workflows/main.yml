@@ -31,10 +31,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-    before_script:
-      - chmod +x ./gradlew
-      - export GRADLE_USER_HOME=$PWD/.gradle
-    script:
+#    before_script:
+#      - chmod +x ./gradlew
+#      - export GRADLE_USER_HOME=$PWD/.gradle
+    run:
       - ./gradlew ktlintCheck
 
 
