@@ -1,0 +1,4 @@
+disabled_rules:
+  - final-newline
+  - import-order
+  - no-wildcard-imports

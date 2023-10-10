@@ -24,11 +24,6 @@ on:
 #      run:
 #          echo other action to build!
 #          echo test and deploy your project.
-disabled_rules:
-  - final-newline
-  - import-order
-  - no-wildcard-imports
-
 jobs:
   ktlint:
     runs-on: ubuntu-latest
