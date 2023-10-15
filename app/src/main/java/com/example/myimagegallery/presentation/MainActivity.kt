@@ -7,16 +7,10 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.myimagegallery.R
-import com.example.myimagegallery.data.imageaccess.ImageRepositoryImpl
 import com.example.myimagegallery.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -34,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { controller, destination, _ ->
-            if (destination.id == R.id.albumDetailFragment || destination.id == R.id.fullScreenImageFragment) {
+            if (destination.id == R.id.albumDetailFragment || destination.id == R.id.fullScreenImageFragment|| destination.id == R.id.askPermissionFragment) {
                 binding.bottomNavigationView.visibility = View.GONE
             } else {
                 binding.bottomNavigationView.visibility = View.VISIBLE

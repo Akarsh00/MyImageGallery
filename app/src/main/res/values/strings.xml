@@ -2,4 +2,8 @@
     <string name="app_name">MyImageGallery</string>
     <string name="album">Album</string>
     <string name="image">Image</string>
+    <string name="grant_permission">Grant Permission</string>
+    <string name="please_provide_permission_for_accessing_image_from_gallery">Please provide permission for Accessing Image from gallery.</string>
+    <string name="permission_deny_toast_message">Please grant permission to access gallery Images</string>
+    <string name="permission_completely_deny_toast_message">Kindly go to settings and grant permission to access images</string>
 </resources>

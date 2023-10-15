@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/imageFragment">
+    app:startDestination="@id/askPermissionFragment">
     <fragment
         android:id="@+id/imageFragment"
         android:name="com.example.myimagegallery.presentation.fragment.homeimage.ImagesFragment"
@@ -30,4 +30,14 @@
         android:id="@+id/albumDetailFragment"
         android:name="com.example.myimagegallery.presentation.fragment.albumdetail.AlbumDetailFragment"
         android:label="AlbumDetailFragment" />
+    <fragment
+        android:id="@+id/askPermissionFragment"
+        android:name="com.example.myimagegallery.presentation.fragment.permission.AskPermissionFragment"
+        android:label="AskPermissionFragment">
+        <action
+            android:id="@+id/permission_to_image_framgent"
+            app:destination="@id/imageFragment"
+            app:popUpTo="@id/askPermissionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
